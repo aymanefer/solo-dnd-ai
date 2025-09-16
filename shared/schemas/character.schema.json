@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Character",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "level",
+    "class",
+    "race",
+    "abilities",
+    "hp",
+    "ac",
+    "speed"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "class": {
+      "type": "string"
+    },
+    "race": {
+      "type": "string"
+    },
+    "alignment": {
+      "type": "string"
+    },
+    "abilities": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "integer"
+        },
+        "dex": {
+          "type": "integer"
+        },
+        "con": {
+          "type": "integer"
+        },
+        "int": {
+          "type": "integer"
+        },
+        "wis": {
+          "type": "integer"
+        },
+        "cha": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ]
+    },
+    "proficiencies": {
+      "type": "object"
+    },
+    "ac": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "hp": {
+      "type": "object",
+      "required": [
+        "current",
+        "max"
+      ],
+      "properties": {
+        "current": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "temp": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "speed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "spells": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "persona": {
+      "type": "object"
+    }
+  }
+}

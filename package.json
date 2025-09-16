@@ -1,0 +1,8 @@
+{
+  "name": "solo-dnd-ai",
+  "private": true,
+  "packageManager": "pnpm@9",
+  "scripts": {
+    "postinstall": "echo 'Install frontend deps inside ./frontend'"
+  }
+}

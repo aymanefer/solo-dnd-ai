@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GameState",
+  "type": "object",
+  "required": [
+    "meta",
+    "party",
+    "characters",
+    "log"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object"
+    },
+    "party": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "characters": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "./character.schema.json"
+      }
+    },
+    "npcs": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "./character.schema.json"
+      }
+    },
+    "locations": {
+      "type": "object"
+    },
+    "quests": {
+      "type": "object"
+    },
+    "flags": {
+      "type": "object"
+    },
+    "log": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

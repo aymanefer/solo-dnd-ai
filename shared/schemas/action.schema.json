@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Action",
+  "type": "object",
+  "required": [
+    "actor_id",
+    "kind"
+  ],
+  "properties": {
+    "actor_id": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "ATTACK",
+        "CHECK",
+        "SAVE",
+        "CAST",
+        "MOVE",
+        "USE",
+        "TALK",
+        "OTHER"
+      ]
+    },
+    "target": {
+      "type": "string"
+    },
+    "skill": {
+      "type": "string"
+    },
+    "ability": {
+      "type": "string"
+    },
+    "advantage": {
+      "type": "boolean"
+    },
+    "disadvantage": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

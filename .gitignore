@@ -1,0 +1,30 @@
+# General
+.DS_Store
+*.log
+*.sqlite
+.env
+.env.*
+.vscode/
+
+# Node / Next.js
+node_modules/
+.npm/
+.pnpm-store/
+.next/
+out/
+.vercel/
+coverage/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+site/
