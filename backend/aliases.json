@@ -1,0 +1,5 @@
+{
+  "int_aliased": "int",
+  "str_aliased": "str",
+  "bool_aliased": "bool"
+}

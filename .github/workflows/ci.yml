@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install black ruff mypy fastapi uvicorn datamodel-code-generator
+      - run: black --check backend/app
+      - run: ruff check backend/app
+      - run: mypy backend/app
+      - run: |
+          cd backend
+          python -m datamodel_code_generator \
+            --input ../shared/schemas/ \
+            --input-file-type jsonschema \
+            --output app/models/
+      - run: git diff --exit-code || (echo "❌ Backend types out of sync" && exit 1)
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: cd frontend && pnpm install
+      - run: cd frontend && pnpm lint
+      - run: cd frontend && pnpm tsc --noEmit
+      - run: cd frontend && pnpm gen:types
+      - run: git diff --exit-code || (echo "❌ Frontend types out of sync" && exit 1)

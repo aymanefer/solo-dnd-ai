@@ -1,8 +1,15 @@
 {
   "name": "solo-dnd-ai",
   "private": true,
-  "packageManager": "pnpm@9",
+  "packageManager": "pnpm",
   "scripts": {
-    "postinstall": "echo 'Install frontend deps inside ./frontend'"
+    "postinstall": "echo 'Install frontend deps inside ./frontend'",
+    "prepare": "husky",
+    "precommit-check": "pnpm lint:all && pnpm typegen:all",
+    "lint:all": "cd backend && .venv/bin/python -m black app && .venv/bin/python -m ruff check app && cd ../frontend && pnpm lint && pnpm tsc --noEmit",
+    "typegen:all": "cd backend && .venv/bin/python -m datamodel_code_generator --input ../shared/schemas/ --input-file-type jsonschema --output app/models/ && cd ../frontend && pnpm gen:types"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }

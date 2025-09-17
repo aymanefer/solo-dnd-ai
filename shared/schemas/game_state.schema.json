@@ -1,48 +1,72 @@
 {
+  "$id": "game_state.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "GameState",
   "type": "object",
-  "required": [
-    "meta",
-    "party",
-    "characters",
-    "log"
-  ],
+  "required": ["meta", "party", "characters", "log"],
   "properties": {
     "meta": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "campaign_id": { "type": "string" },
+        "turn": { "type": "integer" },
+        "datetime": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["easy", "normal", "hard"] }
+      }
     },
     "party": {
       "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" }
     },
     "characters": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "./character.schema.json"
-      }
+      "additionalProperties": { "$ref": "character.schema.json" }
     },
     "npcs": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "./character.schema.json"
-      }
+      "additionalProperties": { "$ref": "character.schema.json" }
     },
     "locations": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
     },
     "quests": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "completed", "failed"] },
+          "objectives": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
     },
     "flags": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": { "type": "boolean" }
     },
     "log": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "t": { "type": "integer" },
+          "type": { "type": "string", "enum": ["ROLL", "ACTION", "EVENT", "NARRATION"] },
+          "detail": { "type": "object" }
+        }
       }
     }
   }

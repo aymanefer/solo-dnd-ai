@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 100
+target-version = ["py313"]
+
+[tool.ruff]
+line-length = 100
+lint.select = ["E", "F"]  # Errors & style fixes
+lint.ignore = ["E501"]    # Line length (handled by Black)
+
+[tool.mypy]
+python_version = "3.13"
+disallow_untyped_defs = true

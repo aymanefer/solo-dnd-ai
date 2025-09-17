@@ -1,0 +1,3 @@
+#!/bin/sh
+pnpm run precommit-check
+git add backend/app/models frontend/src/types
