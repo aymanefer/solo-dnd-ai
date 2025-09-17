@@ -16,7 +16,7 @@ jobs:
       - run: pip install black ruff mypy fastapi uvicorn datamodel-code-generator
       - run: black backend/app
       - run: ruff check backend/app
-      - run: mypy backend/app
+      - run: mypy --config-file backend/mypy.ini backend/app
       - run: |
           cd backend
           python -m datamodel_code_generator \
