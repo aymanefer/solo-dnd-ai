@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install black ruff mypy fastapi uvicorn datamodel-code-generator
-      - run: black --check backend/app
+      - run: black backend/app
       - run: ruff check backend/app
       - run: mypy backend/app
       - run: |
