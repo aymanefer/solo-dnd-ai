@@ -5,9 +5,9 @@
   "scripts": {
     "postinstall": "echo 'Install frontend deps inside ./frontend'",
     "prepare": "husky",
-    "precommit-check": "pnpm lint:all && pnpm typegen:all",
+    "precommit-check": "pnpm typegen:all && pnpm lint:all",
     "lint:all": "cd backend && .venv/bin/python -m black app && .venv/bin/python -m ruff check app && cd ../frontend && pnpm lint && pnpm tsc --noEmit",
-    "typegen:all": "cd backend && .venv/bin/python -m datamodel_code_generator --input ../shared/schemas/ --input-file-type jsonschema --output app/models/ && cd ../frontend && pnpm gen:types"
+    "typegen:all": "cd backend && ./scripts/gen_models.sh && cd ../frontend && pnpm gen:types"
   },
   "devDependencies": {
     "husky": "^9.1.7"
