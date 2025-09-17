@@ -4,7 +4,9 @@ set -e
 .venv/bin/python -m datamodel_code_generator \
   --input ../shared/schemas/ \
   --input-file-type jsonschema \
-  --output app/models/
+  --output app/models/ \
+  --target-python-version 3.11 \
+  --use-standard-collections
 
 # cleanup bogus aliases
 sed -i "s/[a-z_]*int_aliased[0-9]*/int/g" app/models/*.py
