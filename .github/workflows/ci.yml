@@ -18,11 +18,18 @@ jobs:
       - run: ruff check backend/app
       - run: mypy --config-file backend/mypy.ini backend/app
       - run: |
-          cd backend
+          set -e
+
           python -m datamodel_code_generator \
             --input ../shared/schemas/ \
             --input-file-type jsonschema \
-            --output app/models/
+            --output app/models/ \
+            --target-python-version 3.11 \
+            --use-standard-collections
+
+          sed -i "s/[a-z_]*int_aliased[0-9]*/int/g" app/models/*.py
+          sed -i "s/[a-z_]*str_aliased[0-9]*/str/g" app/models/*.py
+          sed -i "s/[a-z_]*bool_aliased[0-9]*/bool/g" app/models/*.py
       - run: git diff --exit-code || (echo "❌ Backend types out of sync" && exit 1)
 
   frontend:
