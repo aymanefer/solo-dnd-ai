@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-.venv/bin/python -m datamodel_code_generator \
+PYTHON=${PYTHON:-.venv/bin/python}
+if [ ! -x "$PYTHON" ]; then
+  PYTHON=$(command -v python3)
+fi
+
+$PYTHON -m datamodel_code_generator \
   --input ../shared/schemas/ \
   --input-file-type jsonschema \
   --output app/models/ \
